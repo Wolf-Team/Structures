@@ -1,5 +1,4 @@
 /* TODO
-* Destroy
 * add timer
 */
 var SUPPORT_NETWORK = getCoreAPILevel() > 10;

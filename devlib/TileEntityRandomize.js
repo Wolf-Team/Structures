@@ -56,3 +56,5 @@ TileEntityRandomize.prototype.isEmpty = function(){
 
     return true;
 }
+
+EXPORT("TileEntityRandomize", TileEntityRandomize);
