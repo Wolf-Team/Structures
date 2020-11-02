@@ -52,7 +52,7 @@ Structure.ROTATE_270Z = [
 	0,0,1
 ];
 
-Structure.ROTATE_RANDOM = [
+Structure.ROTATE_ALL = Structure.ROTATE_RANDOM = [
 	Structure.ROTATE_180X,
 	Structure.ROTATE_180Y,
 	Structure.ROTATE_180Z,
@@ -64,7 +64,6 @@ Structure.ROTATE_RANDOM = [
 	Structure.ROTATE_90Z,
 	Structure.ROTATE_NONE
 ];
-Structure.ROTATE_ALL = Structure.ROTATE_RANDOM;
 Structure.ROTATE_Y = [
 	Structure.ROTATE_NONE,
 	Structure.ROTATE_90Y,
@@ -90,22 +89,3 @@ Structure.MIRROR_Z = [
 
 Structure.PROGRESSIVELY = true;
 Structure.NOT_PROGRESSIVELY = false;
-
-Structure.get = function(name, alerted) {
-	if(StructuresDB.structures.hasOwnProperty(name))
-		return StructuresDB.structures[name];
-	else
-		return new Structure(name, alerted);
-}
-Structure.init = function(folderName){
-	if(typeof folderName != "string" && !(folderName instanceof java.lang.String))
-		throw "folderName is not string.";
-		
-	StructuresDB.folderName = folderName;
-}
-Structure.setInWorld = function(name, x, y, z, rotate, progressively, time){
-	Structure.get(name).set(x, y, z, rotate, progressively, time);
-}
-Structure.destroyInWorld = function(name, x, y, z, rotate, progressively, time){
-	Structure.get(name).destroy(x, y, z, rotate, progressively, time);
-}

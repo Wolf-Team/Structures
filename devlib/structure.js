@@ -205,6 +205,21 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
         }
     }
 }
+Structure.prototype.destroy = function(x, y, z, rotates, blockSource){
+    let i = this.get(x, y, z, rotates, blockSource);
+
+    if(SUPPORT_NETWORK && blockSource == undefined)
+        blockSource = BlockSource.getCurrentWorldGenRegion();
+
+    let rotate = rotates[i];
+
+    for(let i = this._structure.length-1; i >= 0; i--){
+        let blockInfo = this._structure[i];
+        let deltaPos = rotate.getPosition(blockInfo[0], blockInfo[1], blockInfo[2]);
+
+        _World.setBlock(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, 0, 0, blockSource);
+    }
+}
 
 Structure.prototype.readFromFile = function(FileName){
     let path = __dir__ + "/" + Structure.dir + "/" + FileName + ".struct";
