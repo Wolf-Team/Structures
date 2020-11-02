@@ -13,4 +13,4 @@ struct.addTileEntity("chest1", {
     0:{ id:5, count:64 }
 });
 
-struct.writeInFile("test");
+struct.writeInFile("test3");

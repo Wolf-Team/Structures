@@ -8,16 +8,16 @@ TileEntityRandomize.parse = function(obj){
     let ter = new TileEntityRandomize();
     
     for(let i in obj)
-        ter.add(i, obj[i]);
+        ter.add(parseInt(i), obj[i]);
 
     return ter;
 }
 
 TileEntityRandomize.prototype.add = function(chance, nameTileEntity){
     if(typeof(chance) != "number")
-        throw new TypeError('"'+x+'" is not a number.');
+        throw new TypeError('"'+chance+'" is not a number.');
 
-    if(chance <= 0 || chance > 1)
+    if(chance <= 0 || chance > 1 || isNaN(chance))
         throw new Error("Chance must be > 0 AND <= 1.");
 
     if(this._tileEntitysName.hasOwnProperty(chance))
@@ -33,7 +33,7 @@ TileEntityRandomize.prototype.get = function(chance){
         throw new Error("TileEntityRandomize empty.");
 
     if(typeof(chance) != "number")
-        throw new TypeError('"'+x+'" is not a number.');
+        throw new TypeError('"'+chance+'" is not a number.');
 
     if(chance <= 0 || chance > 1)
         throw new Error("Chance must be > 0 AND <= 1.");
@@ -41,9 +41,15 @@ TileEntityRandomize.prototype.get = function(chance){
     for(let maxChance in this._tileEntitysName)
         if(chance <= parseFloat(maxChance))
             return this._tileEntitysName[maxChance];
-            
+
     return null;
 }
+TileEntityRandomize.prototype.toJSON = function(){
+    return this._tileEntitysName;
+  }
 TileEntityRandomize.prototype.isEmpty = function(){
-    return this._tileEntitysName.isEmpty();
+    for(let i in this._tileEntitysName)
+        return false;
+
+    return true;
 }

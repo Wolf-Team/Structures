@@ -33,14 +33,6 @@ var Utility = {
     }
 }
 
-if(!Object.prototype.isEmpty)
-    Object.prototype.isEmpty = function(){
-        for(let i in this)
-            return false;
-            
-        return true;
-    }
-
 if(!Translation.sprintf)
 	Translation.sprintf = function(){
 		var str = Translation.translate(arguments[0]);

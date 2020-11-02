@@ -46,7 +46,7 @@ Structure.prototype.addBlock = function(x, y, z, id, data, tileEntityRandomize){
     let block = [x, y, z];
         
     let blockInfo = id;
-    if(data != undefined){
+    if(data != undefined && data != 0){
         if(!Utility.isInt(data))
             throw new TypeError('"'+data+'" is not a integer.');
 
@@ -162,13 +162,86 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
     }
 }
 
-Structure.prototype.readFromFile = function(FileName){}
+Structure.prototype.readFromFile = function(FileName){
+    let path = __dir__ + "/" + Structure.dir + "/" + FileName + ".struct";
+    if(!FileTools.isExists(path))
+        throw new Error("File \"" + FileName + ".struct\" not found.");
+
+    let version = 0;
+    let read = JSON.parse(FileTools.ReadText(path));
+
+    if(read.version){
+        version = read.version;
+        switch(read.version){
+            case 3:
+                this._structure = read.structure.map(function(i){
+                    if(i[4])
+                        i[4] = TileEntityRandomize.parse(i[4]);
+
+                    return i;
+                });
+                this._tileEntities = read.tile_entities;
+            break;
+            case 2:
+                this._structure = read.structure.map(function(block){
+                    if(block[4]){
+                        let ter = new TileEntityRandomize();
+                        ter.add(1, block[4]);
+                        block[4] = ter;
+                    }
+                    return block;
+                });
+                if(read.te) this._tileEntities = read.te;
+                if(read.chests){
+                    for(let tile in read.chests){
+                        let chest = read.chests[tile]
+                        this._tileEntities[tile] = { slots:{} };
+                        for(let i in chest){
+                            let slot = chest[i];
+                            this._tileEntities[tile].slots[slot[0]] = slot[1];
+                        }
+                    }
+                }
+                
+            break;
+            case 1:
+                this._structure = read.struture.map(function(block){
+                    if(block[4]){
+                        let ter = new TileEntityRandomize();
+                        ter.add(1, block[4]);
+                        block[4] = ter;
+                    }
+                    return block;
+                });
+                if(read.chests){
+                    for(let tile in read.chests){
+                        let chest = read.chests[tile]
+                        this._tileEntities[tile] = { slots:{} };
+                        for(let i in chest){
+                            let slot = chest[i];
+                            this._tileEntities[tile].slots[slot[0]] = slot[1];
+                        }
+                    }
+                }
+                break;
+            default:
+                throw new Error(Translation.sprintf("Unknown version \"%s\".", read.version));
+        }
+    }else{
+        this._structure = read;
+    }
+
+    if(version != StructuresDB.versionSaver)
+        this.writeInFile(FileName);
+}
 Structure.prototype.writeInFile = function(FileName){
     let saveObject = {
-        version:StructuresDB.versionSaver,
-        structure:this._structure,
-        tile_entities:this._tileEntities
+        version: StructuresDB.versionSaver,
+        structure: this._structure
     };
+    
+    if(Object.keys(this._tileEntities).length)
+        saveObject.tile_entities = this._tileEntities;
 
     FileTools.mkdir(__dir__ + "/" + Structure.dir);
     FileTools.WriteText(__dir__ + "/" + Structure.dir + "/" + FileName + ".struct", JSON.stringify(saveObject));

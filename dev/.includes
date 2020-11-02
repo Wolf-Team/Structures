@@ -1,3 +1,5 @@
 header.js
 
-tests/addBlock.js
+#tests/addBlock.js
+#tests/writeInFile.js
+tests/readFromFile.js
