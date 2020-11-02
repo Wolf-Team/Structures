@@ -62,3 +62,4 @@ var StructuresDB = {
 	index:0,
 	versionSaver:2
 }
+var Random = java.util.Random;

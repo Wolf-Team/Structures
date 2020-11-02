@@ -3,3 +3,4 @@
 build.json
 *.code-workspace
 devlib/_structure_old.js
+main.js
