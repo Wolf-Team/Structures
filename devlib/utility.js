@@ -1,4 +1,11 @@
 var Utility = {
+    random:new Random(),
+    getRandom:function(random){
+        if(!(random instanceof Random))
+            random = new Random();
+
+        return random;
+    },
 	isInt:function(x){
 		if(typeof(x) != "number")
 			throw new TypeError('"'+x+'" is not a number.');
@@ -19,19 +26,6 @@ var Utility = {
 				return false;
 		
 		return true;
-    },
-    
-    random:function(min, max){
-        if(min === undefined) min=0;
-        if(max === undefined) max=min+1;
-        
-        return (max-min) * Math.random() + min;
-    },
-    randomI:function(min, max){
-        if(min === undefined) min=0;
-        if(max === undefined) max=min+10;
-
-        return Math.ceil(Utility.random(min, max));
     },
 
     getSID:function(ID){

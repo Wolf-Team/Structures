@@ -48,12 +48,14 @@ Rotate.prototype.getPosition = function(x,y,z){
 Rotate.prototype.add = Rotate.prototype.addRotate;
 Rotate.prototype.adds = Rotate.prototype.addRotates;
 
-Rotate.getRotate = function(rotates){
+Rotate.getRotate = function(rotates, random){
+	random = Utility.getRandom(random);
+
     if(rotates == undefined)
         return new Rotate(Structure.ROTATE_NONE);
 
     if(rotates instanceof Array && (rotates[0] instanceof Array || rotates[0] instanceof Rotate))
-        rotates = rotates[Utility.randomI(0, rotates.length - 1)];
+        rotates = rotates[random.nextInt(rotates.length)];
     
 	return (rotates instanceof Rotate) ? rotates : new Rotate(rotates);
 }

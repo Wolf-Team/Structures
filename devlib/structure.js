@@ -104,10 +104,9 @@ Structure.prototype.check = function(x, y, z, rotates){
 }
 
 Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
-    if(!(random instanceof Random))
-        random = new Random();
+    random = Utility.getRandom(random);
 
-    let rotate = Rotate.getRotate(rotates);
+    let rotate = Rotate.getRotate(rotates, random);
 
     if(SUPPORT_NETWORK && blockSource == undefined)
         blockSource = BlockSource.getCurrentWorldGenRegion();
@@ -129,6 +128,8 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
             let TE_Info = this._tileEntities[blockInfo[4].get(random.nextFloat())];
 
             let TE = World.getContainer(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, blockSource);
+            
+            Debug.message(TE);
             
             if(TE){
                 if(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer)){
