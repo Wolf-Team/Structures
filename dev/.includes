@@ -1,5 +1,13 @@
 header.js
 
+# Testing adding blocks using the "addBlock" method
 #tests/addBlock.js
+
+# Testing writing a structure to a file
 #tests/writeInFile.js
-tests/readFromFile.js
+
+# Testing reading a structure from a file
+#tests/readFromFile.js
+
+# Testing the read structure in the world
+tests/get.js

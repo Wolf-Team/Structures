@@ -31,6 +31,9 @@ TileEntityRandomize.prototype.add = function(chance, nameTileEntity){
 TileEntityRandomize.prototype.get = function(chance){
     if(this.isEmpty())
         throw new Error("TileEntityRandomize empty.");
+        
+    if(chance instanceof Random)
+        chance = chance.nextFloat();
 
     if(typeof(chance) != "number")
         throw new TypeError('"'+chance+'" is not a number.');

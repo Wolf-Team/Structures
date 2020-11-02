@@ -1,9 +1,6 @@
 /* TODO
-* Get
-* Build with TE
 * Destroy
 * add timer
-* Work with files
 */
 var SUPPORT_NETWORK = getCoreAPILevel() > 10;
 
@@ -15,8 +12,12 @@ var _World = {
             World.setBlock(x,y,z, id, data);
         }
     },
-    getBlock:function(){
-        
+    getBlock:function(x, y, z, blockSource){
+        if(SUPPORT_NETWORK){
+            return blockSource.getBlock(x, y, z);
+        }else{
+            return World.getBlock(x, y, z);
+        }
     }
 };
 
@@ -97,6 +98,48 @@ Structure.prototype.addTileEntity = function(name, slots, data){
 }
 
 Structure.prototype.get = function(x, y, z, rotates, blockSource){
+    if(SUPPORT_NETWORK && blockSource == undefined)
+        blockSource = BlockSource.getCurrentWorldGenRegion();
+    
+    if(rotates instanceof Rotate){
+        rotates = [rotates];
+    } else if(rotates instanceof Array){
+        if(typeof rotates[0] == "number"){
+            rotates = [new Rotate(rotates)];
+        }else{
+            for(let i in rotates)
+                if(rotates[i] instanceof Array)
+                    rotates[i] = new Rotate(rotates[i]);
+        }
+    }
+
+    for(let i = 0; i < rotates.length; i++){
+        let rotate = rotates[i],
+            k = 0,
+            l = this._structure.length;
+
+        for(; k < l; k++){
+            let blockInfo = this._structure[k];
+            let deltaPos = rotate.getPosition(blockInfo[0], blockInfo[1], blockInfo[2]),
+                id = blockInfo[3],
+                data = 0;
+            
+            if(typeof(id) == "object"){
+                data = id.data;
+                id = id.id;
+            }
+            if(typeof(id) == "string")
+                id = BlockID[id] || 1;
+            
+            
+            let block = _World.getBlock(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, blockSource);
+            if(block.id != id || block.data != data) break;
+        }
+        
+        if(k == l)
+            return i;
+    }
+
     return -1;
 }
 Structure.prototype.check = function(x, y, z, rotates, blockSource){
@@ -105,11 +148,10 @@ Structure.prototype.check = function(x, y, z, rotates, blockSource){
 
 Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
     random = Utility.getRandom(random);
-
-    let rotate = Rotate.getRotate(rotates, random);
-
     if(SUPPORT_NETWORK && blockSource == undefined)
         blockSource = BlockSource.getCurrentWorldGenRegion();
+
+    let rotate = Rotate.getRotate(rotates, random);
 
     for(let i = this._structure.length-1; i >= 0; i--){
         let blockInfo = this._structure[i];
@@ -117,10 +159,12 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
             id = blockInfo[3],
             data = 0;
         
-        if(typeof(id) != "number"){
+        if(typeof(id) == "object"){
 			data = id.data;
 			id = id.id;
         }
+        if(typeof(id) == "string")
+            id = BlockID[id] || 1;
 
         _World.setBlock(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, id, data, blockSource);
 
@@ -239,7 +283,7 @@ Structure.prototype.writeInFile = function(FileName){
         version: StructuresDB.versionSaver,
         structure: this._structure
     };
-    
+
     if(Object.keys(this._tileEntities).length)
         saveObject.tile_entities = this._tileEntities;
 

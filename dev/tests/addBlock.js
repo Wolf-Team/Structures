@@ -13,14 +13,15 @@ struct.addTileEntity("chest1", {
     0:{ id:5, count:64 }
 });
 
-Callback.addCallback("ItemUse", function (coords, item, block) {
+Callback.addCallback("ItemUse", function (coords, item, block, isExternal, player) {
     var x = coords.x;
     var y = coords.y;
     var z = coords.z;
+    let blockSource = BlockSource.getDefaultForActor(player);
     
     switch(item.id){
         case 280:
-			struct.build(x,y,z, Structure.ROTATE_Y);
+			struct.build(x,y,z, Structure.ROTATE_Y, null, blockSource);
 			Game.prevent();
         break;
     }
