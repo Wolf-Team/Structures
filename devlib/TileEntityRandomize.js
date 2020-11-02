@@ -41,6 +41,8 @@ TileEntityRandomize.prototype.get = function(chance){
     for(let maxChance in this._tileEntitysName)
         if(chance <= parseFloat(maxChance))
             return this._tileEntitysName[maxChance];
+            
+    return null;
 }
 TileEntityRandomize.prototype.isEmpty = function(){
     return this._tileEntitysName.isEmpty();
