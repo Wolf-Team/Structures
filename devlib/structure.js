@@ -25,7 +25,7 @@ var Structure = function(file){
     if(file != undefined)
         this.readFromFile(file);
 }
-Structure.dir = "/structures";
+Structure.dir = "structures";
 
 Structure.prototype.clear = function(){
     this._structure = [];
@@ -96,11 +96,11 @@ Structure.prototype.addTileEntity = function(name, slots, data){
     this._tileEntities[name] = TileEntity;
 }
 
-Structure.prototype.get = function(x, y, z, rotates){
+Structure.prototype.get = function(x, y, z, rotates, blockSource){
     return -1;
 }
-Structure.prototype.check = function(x, y, z, rotates){
-    return this.get(x, y, z, rotates) != -1;
+Structure.prototype.check = function(x, y, z, rotates, blockSource){
+    return this.get(x, y, z, rotates, blockSource) != -1;
 }
 
 Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
@@ -163,7 +163,16 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
 }
 
 Structure.prototype.readFromFile = function(FileName){}
-Structure.prototype.writeInFile = function(FileName){}
+Structure.prototype.writeInFile = function(FileName){
+    let saveObject = {
+        version:StructuresDB.versionSaver,
+        structure:this._structure,
+        tile_entities:this._tileEntities
+    };
+
+    FileTools.mkdir(__dir__ + "/" + Structure.dir);
+    FileTools.WriteText(__dir__ + "/" + Structure.dir + "/" + FileName + ".struct", JSON.stringify(saveObject));
+}
 
 
 

@@ -18,7 +18,7 @@
     ©WolfTeam ( https://vk.com/wolf___team )
 */
 /*  ChangeLog:
-	v2
+	v2.0
 	- Поддержка мультипллера
 	- Рандомное сожержимое TileEntity
 	v1.4
@@ -52,15 +52,13 @@
 */
 LIBRARY({
     name: "StructuresAPI",
-    version: 6,
+    version: 7,
     shared: false,
     api: "CoreEngine"
 });
 
 var StructuresDB = {
 	structures:{},
-	dir:"structures",
-	index:0,
-	versionSaver:2
+	versionSaver:3
 }
 var Random = java.util.Random;
