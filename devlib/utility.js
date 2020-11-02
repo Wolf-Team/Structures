@@ -10,11 +10,11 @@ var Utility = {
 		if(!Utility.isInt(slot.id) && id < 0)
 			return false;
 		
-		if(slot.data !== undefinde)
+		if(slot.data !== undefined)
 			if(!Utility.isInt(slot.data) && slot.data < 0)
 				return false;
 
-		if(slot.count !== undefinde)
+		if(slot.count !== undefined)
 			if(!Utility.isInt(slot.count) && slot.count < 1)
 				return false;
 		

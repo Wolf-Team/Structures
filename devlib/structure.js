@@ -22,7 +22,7 @@ var _World = {
 
 var Structure = function(file){
     this.clear();
-    if(str != undefined)
+    if(file != undefined)
         this.readFromFile(file);
 }
 Structure.dir = "/structures";
@@ -104,7 +104,7 @@ Structure.prototype.check = function(x, y, z, rotates){
 }
 
 Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
-    if(!random instanceof Random)
+    if(!(random instanceof Random))
         random = new Random();
 
     let rotate = Rotate.getRotate(rotates);
@@ -128,39 +128,40 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
         if(blockInfo[4] instanceof TileEntityRandomize){
             let TE_Info = this._tileEntities[blockInfo[4].get(random.nextFloat())];
 
-            let TE = World.getContainer(x, y, z, blockSource);
+            let TE = World.getContainer(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, blockSource);
             
-            Debug.message(TE);
-
-            if(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer)){
-                TE = World.addTileEntity(x, y, z, blockSource);
-                if(TE){
-                    TE.data = TE_Info.data;
+            if(TE){
+                if(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer)){
+                    TE = World.addTileEntity(x, y, z, blockSource);
+                    if(TE){
+                        TE.data = TE_Info.data;
+                        for(let i in TE_Info.slots){
+                            let slot = TE_Info.slots[i];
+                            let item_id = slot.id;
+                            if(isNaN(parseInt(item_id)))
+                                item_id = BlockID[item_id] || ItemID[item_id];
+                            
+                            TE.container.setSlot(i, item_id, slot.count, slot.data);
+                            TE.container.sendChanges();
+                        }
+                    }
+                }else{
+                    let size = TE.getSize();
+                    
                     for(let i in TE_Info.slots){
+                        i = parseInt(i);
+                        if(isNaN(i) || i >= size) continue;
+    
                         let slot = TE_Info.slots[i];
                         let item_id = slot.id;
                         if(isNaN(parseInt(item_id)))
                             item_id = BlockID[item_id] || ItemID[item_id];
-                        
-                        TE.container.setSlot(i, item_id, slot.count, slot.data);
-                        TE.container.sendChanges();
+    
+                        TE.setSlot(i, item_id, slot.count, slot.data || 0);
                     }
                 }
-            }else{
-                let size = TE.getSize();
-                
-                for(let i in TE_Info.slots){
-                    i = parseInt(i);
-                    if(isNaN(i) || i >= size) continue;
-
-                    let slot = TE_Info.slots[i];
-                    let item_id = slot.id;
-                    if(isNaN(parseInt(item_id)))
-                        item_id = BlockID[item_id] || ItemID[item_id];
-
-                    TE.setSlot(i, item_id, slot.count, slot.data || 0);
-                }
             }
+            
 
         }
     }
