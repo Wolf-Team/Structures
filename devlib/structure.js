@@ -221,6 +221,7 @@ Structure.prototype.destroy = function(x, y, z, rotates, blockSource){
 }
 
 Structure.prototype.readFromFile = function(FileName){
+
     let path = __dir__ + "/" + Structure.dir + "/" + FileName + ".struct";
     if(!FileTools.isExists(path))
         throw new Error("File \"" + FileName + ".struct\" not found.");
@@ -291,6 +292,8 @@ Structure.prototype.readFromFile = function(FileName){
 
     if(version != StructuresDB.versionSaver)
         this.writeInFile(FileName);
+
+    StructuresDB.structures[FileName] = this;
 }
 Structure.prototype.writeInFile = function(FileName){
     let saveObject = {
@@ -305,6 +308,12 @@ Structure.prototype.writeInFile = function(FileName){
     FileTools.WriteText(__dir__ + "/" + Structure.dir + "/" + FileName + ".struct", JSON.stringify(saveObject));
 }
 
+Structure.get = function(file){
+    if(StructuresDB.structures.hasOwnProperty(file))
+       return StructuresDB.structures[file];
+    else
+        return new Structure(file);
+}
 
 
 EXPORT("Structure", Structure);

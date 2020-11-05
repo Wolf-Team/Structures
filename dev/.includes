@@ -13,4 +13,4 @@ header.js
 # tests/get.js
 
 # Testing structure destruction
-tests/destroy.js
+# tests/destroy.js
