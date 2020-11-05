@@ -1,13 +1,15 @@
 header.js
 
+utility.js
+
 structure.js
 structure_const.js
 
 rotate.js
 
 TileEntityRandomize.js
-
-utility.js
+TileEntityFiller.js
+DefaultTileEntityFiller.js
 
 //WorldEdit.js
 

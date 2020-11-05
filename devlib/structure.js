@@ -73,27 +73,17 @@ Structure.prototype.addBlock = function(x, y, z, id, data, tileEntityRandomize){
     this._structure.push(block);
 }
 
-Structure.prototype.addTileEntity = function(name, slots, data){
+Structure.prototype.addTileEntity = function(name, tileEntityFiller){
     if(typeof(name) != "string")
         throw new TypeError('"'+name+'" is not a string.');
 
     if(this._tileEntities.hasOwnProperty(name))
         throw new Error("TileEntity "+name+" already exists in the structure.");
 
-    for(let i in slots){
-        let slot = slots[i];
-        if(!Utility.checkSlot(slot))
-            throw new TypeError(i+':"'+JSON.stringify(slot)+'" is not a ItemInstance.');
-    }
+    if(!tileEntityFiller instanceof TileEntityFiller)
+        throw new TypeError('tileEntityFiller is not a TileEntityFiller.');
 
-    let TileEntity = { slots:slots };
-
-    if(data){
-        if(!typeof(data) == "object")
-            throw new TypeError('"'+data+'" is not a object.');
-        TileEntity.data = data;
-    }
-    this._tileEntities[name] = TileEntity;
+    this._tileEntities[name] = tileEntityFiller;
 }
 
 Structure.prototype.get = function(x, y, z, rotates, blockSource){
@@ -170,36 +160,11 @@ Structure.prototype.build = function(x,y,z, rotates, random, blockSource){
         if(blockInfo[4] instanceof TileEntityRandomize){
             let TE_name = blockInfo[4].get(random.nextFloat());
             if(TE_name){
-                let TE_Info = this._tileEntities[TE_name];
+                let TE_Filler = this._tileEntities[TE_name];
                 let TE = World.getContainer(x + deltaPos.x, y + deltaPos.y, z + deltaPos.z, blockSource);
-
-                let isNative = !(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer));
-                let isItemContainer = SUPPORT_NETWORK && TE instanceof ItemContainer;
-
-                if(TE){
-                    let size = isNative ? TE.getSize() : 0;
-
-                    for(let i in TE_Info.slots){
-                        if(isNative){
-                            i = parseInt(i);
-                            if(isNaN(i) || i >= size) continue;
-                        }
-
-                        let slot = TE_Info.slots[i];
-                        let item_id = slot.id;
-                        if(isNaN(parseInt(item_id)))
-                            item_id = BlockID[item_id] || ItemID[item_id];
-    
-                        TE.setSlot(i, item_id, slot.count, slot.data || 0);
-                        if(isItemContainer) TE.sendChanges();
-                    }
-
-                    if(!isNative){
-                        TE = World.addTileEntity(x, y, z, blockSource);
-                        if(TE)
-                            TE.data = TE_Info.data;
-                    }
-                }
+                if(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer))
+                    TE = World.addTileEntity(x, y, z, blockSource);
+                TE_Filler.fill(TE, random);
             }
         }
     }
@@ -239,7 +204,9 @@ Structure.prototype.readFromFile = function(FileName){
 
                     return i;
                 });
-                this._tileEntities = read.tile_entities;
+                for(let i in read.tile_entities)
+                    this._tileEntities[i] = TileEntityFiller.parseJSON(read.tile_entities[i]);
+
             break;
             case 2:
                 this._structure = read.structure.map(function(block){
@@ -250,11 +217,15 @@ Structure.prototype.readFromFile = function(FileName){
                     }
                     return block;
                 });
-                if(read.te) this._tileEntities = read.te;
+                if(read.te)
+                    for(let i in read.te)
+                        this._tileEntities[i] = new DefaultTileEntityFiller(read.te[i].slots, read.te[i].data);
+                        
+
                 if(read.chests){
                     for(let tile in read.chests){
                         let chest = read.chests[tile]
-                        this._tileEntities[tile] = { slots:{} };
+                        this._tileEntities[tile] = new DefaultTileEntityFiller();
                         for(let i in chest){
                             let slot = chest[i];
                             this._tileEntities[tile].slots[slot[0]] = slot[1];
@@ -275,7 +246,7 @@ Structure.prototype.readFromFile = function(FileName){
                 if(read.chests){
                     for(let tile in read.chests){
                         let chest = read.chests[tile]
-                        this._tileEntities[tile] = { slots:{} };
+                        this._tileEntities[tile] = new DefaultTileEntityFiller();
                         for(let i in chest){
                             let slot = chest[i];
                             this._tileEntities[tile].slots[slot[0]] = slot[1];

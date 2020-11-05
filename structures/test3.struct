@@ -10,6 +10,7 @@
     ],
     "tile_entities": {
         "chest1": {
+            "type":"default_filler",
             "slots": {
                 "0": { "id": 5, "count": 64 }
             }

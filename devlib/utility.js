@@ -30,6 +30,16 @@ var Utility = {
 
     getSID:function(ID){
         return IDRegistry.getNameByID(ID) || ID;
+	},
+	
+	extends: function(Child, Parent){
+        var F = function(){};
+        F.prototype = Parent.prototype;
+        Child.prototype = new F();
+        Child.prototype.constructor = Child;
+        
+        //Child.prototype.superclass =
+        Child.superclass = Parent.prototype;
     }
 }
 
