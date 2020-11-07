@@ -1,6 +1,6 @@
 # StructuresAPI
 StructuresAPI - Библиотека, упрощающая работу со структурами.
-
+[en](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.md) | **ru**
 ## Начать
 Перед началом работы, требуется импортировать библиотеку.
 ``` js

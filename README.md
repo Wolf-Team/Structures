@@ -1,6 +1,6 @@
 # StructuresAPI
 StructuresAPI - A library that simplifies working with structures.
-
+**en** | [ru](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.RU.md)
 ## Get Start
 Before starting work, you need to import the library.
 ``` js
