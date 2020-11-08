@@ -89,7 +89,7 @@ DefaultTileEntityFiller fill the TileEntity with the specified content. Supports
 }
 ```
 ### APOFiller
-APOFiller migrated straight from [A.P.O. Craft] (https://github.com/mineprogramming/APO_craft). Supports only native TileEntity. The file has the following format:
+APOFiller migrated straight from [A.P.O. Craft](https://github.com/mineprogramming/APO_craft). Supports only native TileEntity. The file has the following format:
 ```js
 {
     "type":"apo_filler",
