@@ -1,6 +1,8 @@
-# StructuresAPI
+# StructuresAPI 2.0
 StructuresAPI - Библиотека, упрощающая работу со структурами.
+
 [en](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.md) | **ru**
+
 ## Начать
 Перед началом работы, требуется импортировать библиотеку.
 ``` js
@@ -10,7 +12,8 @@ IMPORT("StructuresAPI", "Structure"); // Импортировать модулю
 IMPORT("StructuresAPI", "Rotate"); // Импортировать модуль поворотов
 IMPORT("StructuresAPI", "TileEntityRandomize"); // Импортировать модуль TileEntityRandomize
 IMPORT("StructuresAPI", "TileEntityFiller"); // Импортировать модуль TileEntityFiller
-IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Импортировать модуль DefaultTileEntityFiller
+IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Импортировать DefaultTileEntityFiller
+IMPORT("StructuresAPI", "APOFiller"); // Импортировать заполнитель из APOCraft
 ```
 
 ## Сохранение структур в файл
@@ -74,6 +77,34 @@ TileEntityRandomize является объектом формата *"Шанс"
     ... // Данные заполнителя
 }
 ```
+
+## Стандартные заполнители
+### DefaultTileEntityFiller
+DefaultTileEntityFiller заполняет TileEntity указаным содержимым. Поддерживает как нативные, так и кастомные TileEntity. В файле имеет следующий формат:
+```js
+{
+    "type":"default_filler",
+    "slots":{},//Объект формата "Имя слота":ItemInstance.
+    "data":{} //Данные TileEntity
+}
+```
+### APOFiller
+APOFiller перекочевал прямиком из [A.P.O. Craft](https://github.com/mineprogramming/APO_craft). Поддерживает только нативные TileEntity. В файле имеет следующий формат:
+```js
+{
+    "type":"apo_filler",
+    "items":[// Массив предметов, которые могут быть сгенерированы внутри TileEntity
+        {
+            "id": 5, // int - ID предмета
+            "data": 1, // int - data предмета
+            "rarity": 1, // float - Шанс генерации предмета, от 0 до 1
+            "count": 4 // int | {"min":int, "max":int} - Количество генерируемого предмета. Если количество задано в виде объекта, то оно генерируется случайным образом.
+        },
+    ]
+}
+```
+### Кастомные заполнители
+Информация не найдена, упс :(
 
 ## Старые версии:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)

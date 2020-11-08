@@ -1,6 +1,8 @@
 # StructuresAPI
 StructuresAPI - A library that simplifies working with structures.
+
 **en** | [ru](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.RU.md)
+
 ## Get Start
 Before starting work, you need to import the library.
 ``` js
@@ -10,7 +12,8 @@ IMPORT("StructuresAPI", "Structure"); // Import module of structures
 IMPORT("StructuresAPI", "Rotate"); // Import module of turns
 IMPORT("StructuresAPI", "TileEntityRandomize"); // Import module TileEntityRandomize
 IMPORT("StructuresAPI", "TileEntityFiller"); // Import module TileEntityFiller
-IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Import module DefaultTileEntityFiller
+IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Import DefaultTileEntityFiller
+IMPORT("StructuresAPI", "APOFiller"); // Import filler from APOCraft
 ```
 
 ## Save structure in file
@@ -74,6 +77,34 @@ TE fillers have the format *"Filler Name": {Filler Data}*
     ... // Filler data
 }
 ```
+
+## Standard fillers
+### DefaultTileEntityFiller
+DefaultTileEntityFiller fill the TileEntity with the specified content. Supports native and custom TileEntity. The file has the following format:
+```js
+{
+    "type":"default_filler",
+    "slots":{},//Object of format "Slot name": ItemInstance.
+    "data":{} //TileEntity data
+}
+```
+### APOFiller
+APOFiller migrated straight from [A.P.O. Craft] (https://github.com/mineprogramming/APO_craft). Supports only native TileEntity. The file has the following format:
+```js
+{
+    "type":"apo_filler",
+    "items":[// Array of items that can be generated inside TileEntity
+        {
+            "id": 5, // int - item ID
+            "data": 1, // int - item data
+            "rarity": 1, // float - Item Generation Chance, from 0 to 1
+            "count": 4 // int | {"min":int, "max":int} - The amount of generated item. If the quantity is specified as an object, then it is generated randomly.
+        },
+    ]
+}
+```
+### Custom placeholders
+Not found info, oops :(
 
 ## Older versions:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)
