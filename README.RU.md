@@ -104,7 +104,33 @@ APOFiller перекочевал прямиком из [A.P.O. Craft](https://gi
 }
 ```
 ### Кастомные заполнители
-Информация не найдена, упс :(
+```js
+function CustomTileEntityFiller(){
+};
+//Регистрация заполнителя (Обязательно)
+TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
+
+/**
+ * Заполнение TileEntity
+ * @param TE - NativeTileEntity | TileEntity
+ * @param random - java.lang.Random
+ */
+CustomTileEntityFiller.prototype.fill = function(TE, random){}
+/**
+ * Чтение заполнителя из файла
+ * @param json - object from File
+ */
+CustomTileEntityFiller.prototype.parseJSON = function(json){}
+/**
+ * Запись заполнителя в файл
+ */
+CustomTileEntityFiller.prototype.toJSON = function(){
+    //Получить JSON от родительского заполнителя. (Обязательно)
+    let json = CustomTileEntityFiller.superclass.toJSON.apply(this);
+    //Здесь добавить свои данные
+    return json;
+}
+```
 
 ## Старые версии:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)

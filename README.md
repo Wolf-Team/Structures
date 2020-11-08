@@ -1,4 +1,4 @@
-# StructuresAPI
+# StructuresAPI 2.0
 StructuresAPI - A library that simplifies working with structures.
 
 **en** | [ru](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.RU.md)
@@ -103,8 +103,34 @@ APOFiller migrated straight from [A.P.O. Craft] (https://github.com/mineprogramm
     ]
 }
 ```
-### Custom placeholders
-Not found info, oops :(
+### Custom filler
+```js
+function CustomTileEntityFiller(){
+};
+//Register filler (Required)
+TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
+
+/**
+ * Filling TileEntity
+ * @param TE - NativeTileEntity | TileEntity
+ * @param random - java.lang.Random
+ */
+CustomTileEntityFiller.prototype.fill = function(TE, random){}
+/**
+ * Read from file
+ * @param json - object from File
+ */
+CustomTileEntityFiller.prototype.parseJSON = function(json){}
+/**
+ * Write in file
+ */
+CustomTileEntityFiller.prototype.toJSON = function(){
+    //Get JSON from parent filler. (Required)
+    let json = CustomTileEntityFiller.superclass.toJSON.apply(this);
+    //Here adding your data
+    return json;
+}
+```
 
 ## Older versions:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)
