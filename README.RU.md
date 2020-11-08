@@ -51,6 +51,29 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 })
 ```
 
+## Структура файла структуры
+```js
+{
+    "version":3,//int - версия структуры файла
+    "structures":[], // Массив блоков формата [int x, int y, int z, ItemInstance item, TileEntityRandomize? radom_te]
+    "tile_entities":{} // Список заполнителей TE
+}
+```
+
+TileEntityRandomize является объектом формата *"Шанс":"Имя заполнителя"*. Шанс указывается от 0 до 1.
+```js
+{
+    "1":"test_te"
+}
+```
+
+Заполнители TE имеют формат *"Имя заполнителя":{Данные заполнителя}*
+```js
+"test_te":{ // Заполнитель TE с именем test_te
+    "type":"default_filler",// Тип заполнителя (ОБЯЗАТЕЛЬНО)
+    ... // Данные заполнителя
+}
+```
 
 ## Старые версии:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)

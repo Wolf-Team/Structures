@@ -51,6 +51,29 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 })
 ```
 
+## Structure file structure
+```js
+{
+    "version":3,//int - file structure version
+    "structures":[], // An array of blocks of the format [int x, int y, int z, ItemInstance item, TileEntityRandomize? radom_te]
+    "tile_entities":{} // List of TE filler
+}
+```
+
+TileEntityRandomize is an object of the format *"Chance":"Filler Name"*. The chance is indicated from 0 to 1.
+```js
+{
+    "1":"test_te"
+}
+```
+
+TE fillers have the format *"Filler Name": {Filler Data}*
+```js
+"test_te":{ // TE filler named test_te
+    "type":"default_filler", // Filler type (REQUIRED)
+    ... // Filler data
+}
+```
 
 ## Older versions:
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)
