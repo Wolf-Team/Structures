@@ -14,3 +14,6 @@ header.js
 
 # Testing structure destruction
 # tests/destroy.js
+
+# Testing structure generation in chunk
+tests/gen_chunk.js
