@@ -259,7 +259,7 @@ Structure.prototype.readFromFile = function(FileName){
                 }
                 break;
             default:
-                throw new Error(Translation.sprintf("Unknown version \"%s\".", read.version));
+                throw new Error("Unknown version \"" + read.version + "\".");
         }
     }else{
         this._structure = read;

@@ -42,13 +42,3 @@ var Utility = {
         Child.superclass = Parent.prototype;
     }
 }
-
-if(!Translation.sprintf)
-	Translation.sprintf = function(){
-		var str = Translation.translate(arguments[0]);
-		
-		for(var i = 1; i < arguments.length; i++)
-			str = str.replace("%s", arguments[i]);
-		
-		return str;
-    };
