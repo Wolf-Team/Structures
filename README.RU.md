@@ -1,19 +1,19 @@
-# StructuresAPI 2.0
-StructuresAPI - Библиотека, упрощающая работу со структурами.
+# Structures 2.0
+Structures - Библиотека, упрощающая работу со структурами.
 
-[en](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.md) | **ru**
+[en](https://github.com/Wolf-Team/Structures/blob/main/README.md) | **ru**
 
 ## Начать
 Перед началом работы, требуется импортировать библиотеку.
 ``` js
-IMPORT("StructuresAPI", "*"); // Импортировать все модули
+IMPORT("Structures", "*"); // Импортировать все модули
 // Или
-IMPORT("StructuresAPI", "Structure"); // Импортировать модулю структур
-IMPORT("StructuresAPI", "Rotate"); // Импортировать модуль поворотов
-IMPORT("StructuresAPI", "TileEntityRandomize"); // Импортировать модуль TileEntityRandomize
-IMPORT("StructuresAPI", "TileEntityFiller"); // Импортировать модуль TileEntityFiller
-IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Импортировать DefaultTileEntityFiller
-IMPORT("StructuresAPI", "APOFiller"); // Импортировать заполнитель из APOCraft
+IMPORT("Structures", "Structure"); // Импортировать модулю структур
+IMPORT("Structures", "Rotate"); // Импортировать модуль поворотов
+IMPORT("Structures", "TileEntityRandomize"); // Импортировать модуль TileEntityRandomize
+IMPORT("Structures", "TileEntityFiller"); // Импортировать модуль TileEntityFiller
+IMPORT("Structures", "DefaultTileEntityFiller"); // Импортировать DefaultTileEntityFiller
+IMPORT("Structures", "APOFiller"); // Импортировать заполнитель из APOCraft
 ```
 
 ## Сохранение структур в файл

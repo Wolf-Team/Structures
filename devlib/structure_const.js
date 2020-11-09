@@ -86,6 +86,3 @@ Structure.MIRROR_Z = [
 	0,1,0,
 	0,0,-1
 ];
-
-Structure.PROGRESSIVELY = true;
-Structure.NOT_PROGRESSIVELY = false;

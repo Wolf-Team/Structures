@@ -1,19 +1,19 @@
-# StructuresAPI 2.0
-StructuresAPI - A library that simplifies working with structures.
+# Structures 2.0
+Structures - A library that simplifies working with structures.
 
-**en** | [ru](https://github.com/Wolf-Team/StructuresAPI/blob/main/README.RU.md)
+**en** | [ru](https://github.com/Wolf-Team/Structures/blob/main/README.RU.md)
 
 ## Get Start
 Before starting work, you need to import the library.
 ``` js
-IMPORT("StructuresAPI", "*"); // Import all modules
+IMPORT("Structures", "*"); // Import all modules
 // Or
-IMPORT("StructuresAPI", "Structure"); // Import module of structures
-IMPORT("StructuresAPI", "Rotate"); // Import module of turns
-IMPORT("StructuresAPI", "TileEntityRandomize"); // Import module TileEntityRandomize
-IMPORT("StructuresAPI", "TileEntityFiller"); // Import module TileEntityFiller
-IMPORT("StructuresAPI", "DefaultTileEntityFiller"); // Import DefaultTileEntityFiller
-IMPORT("StructuresAPI", "APOFiller"); // Import filler from APOCraft
+IMPORT("Structures", "Structure"); // Import module of structures
+IMPORT("Structures", "Rotate"); // Import module of turns
+IMPORT("Structures", "TileEntityRandomize"); // Import module TileEntityRandomize
+IMPORT("Structures", "TileEntityFiller"); // Import module TileEntityFiller
+IMPORT("Structures", "DefaultTileEntityFiller"); // Import DefaultTileEntityFiller
+IMPORT("Structures", "APOFiller"); // Import filler from APOCraft
 ```
 
 ## Save structure in file
