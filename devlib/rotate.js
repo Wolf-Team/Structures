@@ -2,7 +2,7 @@ var Rotate = function(r){
 	this._rotates = [];
 
 	if(r){
-		if(r instanceof Array && (r[0] instanceof Array || r[0] instanceof Rotate)){
+		if(Array.isArray(r) && (Array.isArray(r[0]) || r[0] instanceof Rotate)){
 			this.addRotates(r);
 		}else{
 			this.addRotate(r);
@@ -10,7 +10,7 @@ var Rotate = function(r){
 	}
 }
 Rotate.prototype.addRotate = function(matrix){
-	if(!matrix instanceof Array && !matrix instanceof Rotate)
+	if(!Array.isArray(matrix) && !matrix instanceof Rotate)
 		throw "is not matrix";
 	
 	if(matrix instanceof Rotate)
@@ -25,7 +25,7 @@ Rotate.prototype.addRotate = function(matrix){
 	this._rotates.push(matrix);
 }
 Rotate.prototype.addRotates = function(rotates){
-	if(!rotates instanceof Array) throw "is not array";
+	if(!Array.isArray(rotates)) throw "is not array";
 	
 	for(let i = 0; i < rotates.length; i++)
 		this.addRotate(rotates[i]);
@@ -53,8 +53,8 @@ Rotate.getRotate = function(rotates, random){
 
     if(rotates == undefined)
         return new Rotate(Structure.ROTATE_NONE);
-
-    if(rotates instanceof Array && (rotates[0] instanceof Array || rotates[0] instanceof Rotate))
+	
+    if(Array.isArray(rotates) && (Array.isArray(rotates[0]) || rotates[0] instanceof Rotate))
         rotates = rotates[random.nextInt(rotates.length)];
     
 	return (rotates instanceof Rotate) ? rotates : new Rotate(rotates);

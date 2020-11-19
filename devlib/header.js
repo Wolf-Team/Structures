@@ -44,7 +44,7 @@
 */
 LIBRARY({
     name: "Structures",
-    version: 7,
+    version: 8,
     shared: false,
     api: "CoreEngine"
 });

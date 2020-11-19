@@ -96,12 +96,12 @@ Structure.prototype.get = function(x, y, z, rotates, blockSource){
     
     if(rotates instanceof Rotate){
         rotates = [rotates];
-    } else if(rotates instanceof Array){
+    } else if(Array.isArray(rotates)){
         if(typeof rotates[0] == "number"){
             rotates = [new Rotate(rotates)];
         }else{
             for(let i in rotates)
-                if(rotates[i] instanceof Array)
+                if(Array.isArray(rotates[i]))
                     rotates[i] = new Rotate(rotates[i]);
         }
     }
