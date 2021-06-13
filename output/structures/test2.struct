@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "structure": [
+        [0,  1, 0, { "id": 5, "data": 2 }],
+        [1,  1, 0, { "id": 5, "data": 2 }],
+        [-1, 1, 0, { "id": 5, "data": 2 }],
+        [0,  2, 0, { "id": 5, "data": 2 }],
+        [0,  3, 0, { "id": 5, "data": 4 }],
+        [0,  4, 0, 54, "chest1"]
+    ],
+    "chests": {
+        "chest1": [
+            [0, { "id": 5, "count": 64 }]
+        ]
+    },
+    "te": {
+        "test": {
+            "data": {
+                "test_data": 1
+            },
+            "slots": {
+                "test_slot": {
+                    "id": 280,
+                    "count": 2
+                }
+            }
+        }
+    }
+}
