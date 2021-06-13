@@ -1,7 +1,7 @@
 interface ITileEntityFiller { type: string; }
 
 class TileEntityFiller implements ITileEntityFiller {
-    private static _filler: Dict<typeof TileEntityFiller>;
+    private static _filler: Dict<typeof TileEntityFiller> = {};
 
     public static register(filler: typeof TileEntityFiller) {
         if (this._filler.hasOwnProperty(filler.prototype.type))

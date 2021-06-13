@@ -244,6 +244,7 @@ var TileEntityFiller = /** @class */ (function () {
         return { type: this.type };
     };
     ;
+    TileEntityFiller._filler = {};
     return TileEntityFiller;
 }());
 EXPORT("TileEntityFiller", TileEntityFiller);
@@ -272,6 +273,7 @@ var APOFiller = /** @class */ (function (_super) {
     function APOFiller(items) {
         var _this = _super.call(this) || this;
         _this.type = "apo_filler";
+        _this._items = [];
         if (items)
             _this._items = items;
         return _this;

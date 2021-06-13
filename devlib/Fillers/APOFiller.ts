@@ -30,7 +30,7 @@ interface IAPOFiller extends ITileEntityFiller {
 }
 class APOFiller extends TileEntityFiller {
     public readonly type: string = "apo_filler";
-    private _items: APOItem[];
+    private _items: APOItem[] = [];
 
     constructor(items?: APOItem[]) {
         super();
