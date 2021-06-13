@@ -81,6 +81,6 @@ class APOFiller extends TileEntityFiller {
         return json;
     }
 }
-TileEntityFiller.register(APOFiller);
+TileEntityFiller.register("apo_filler", APOFiller);
 
 EXPORT("APOFiller", APOFiller);

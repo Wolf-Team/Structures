@@ -224,13 +224,13 @@ var TileEntityFiller = /** @class */ (function () {
     function TileEntityFiller() {
         this.type = "";
     }
-    TileEntityFiller.register = function (filler) {
-        if (this._filler.hasOwnProperty(filler.prototype.type))
-            throw new Error();
-        this._filler[filler.prototype.type] = filler;
+    TileEntityFiller.register = function (type, filler) {
+        if (this._filler.hasOwnProperty(type))
+            throw new Error("Filler \"" + type + "\" was been registered!");
+        this._filler[type] = filler;
     };
     TileEntityFiller.parseJSON = function (json) {
-        if (!TileEntityFiller._filler.hasOwnProperty(json.type))
+        if (!this._filler.hasOwnProperty(json.type))
             throw new Error("Not found TileEntityFiller " + json.type);
         var TEFiller = TileEntityFiller._filler[json.type];
         var filler = new TEFiller();
@@ -314,7 +314,7 @@ var APOFiller = /** @class */ (function (_super) {
     };
     return APOFiller;
 }(TileEntityFiller));
-TileEntityFiller.register(APOFiller);
+TileEntityFiller.register("apo_filler", APOFiller);
 EXPORT("APOFiller", APOFiller);
 /// <reference path="TileEntityFiller.ts" />
 var DefaultTileEntityFiller = /** @class */ (function (_super) {
@@ -370,7 +370,7 @@ var DefaultTileEntityFiller = /** @class */ (function (_super) {
     };
     return DefaultTileEntityFiller;
 }(TileEntityFiller));
-TileEntityFiller.register(DefaultTileEntityFiller);
+TileEntityFiller.register("default_filler", DefaultTileEntityFiller);
 /*
 DefaultTileEntityFiller.prototype.fill = function (TE) {
     let isNative = !(TE instanceof UI.Container || (SUPPORT_NETWORK && TE instanceof ItemContainer));

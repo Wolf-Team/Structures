@@ -61,7 +61,7 @@ interface ITileEntityFiller {
 }
 declare class TileEntityFiller implements ITileEntityFiller {
     private static _filler;
-    static register(filler: typeof TileEntityFiller): void;
+    static register(type: string, filler: typeof TileEntityFiller): void;
     static parseJSON(json: ITileEntityFiller): TileEntityFiller;
     type: string;
     fill(TE: ItemContainer | TileEntity | NativeTileEntity, random: Random): void;

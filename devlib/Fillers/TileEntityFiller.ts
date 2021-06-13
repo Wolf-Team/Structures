@@ -3,14 +3,14 @@ interface ITileEntityFiller { type: string; }
 class TileEntityFiller implements ITileEntityFiller {
     private static _filler: Dict<typeof TileEntityFiller> = {};
 
-    public static register(filler: typeof TileEntityFiller) {
-        if (this._filler.hasOwnProperty(filler.prototype.type))
-            throw new Error();
+    public static register(type: string, filler: typeof TileEntityFiller) {
+        if (this._filler.hasOwnProperty(type))
+            throw new Error(`Filler "${type}" was been registered!`);
 
-        this._filler[filler.prototype.type] = filler;
+        this._filler[type] = filler;
     }
     public static parseJSON(json: ITileEntityFiller) {
-        if (!TileEntityFiller._filler.hasOwnProperty(json.type))
+        if (!this._filler.hasOwnProperty(json.type))
             throw new Error("Not found TileEntityFiller " + json.type);
 
         let TEFiller = TileEntityFiller._filler[json.type];

@@ -60,7 +60,7 @@ class DefaultTileEntityFiller extends TileEntityFiller {
     }
 
 }
-TileEntityFiller.register(DefaultTileEntityFiller);
+TileEntityFiller.register("default_filler", DefaultTileEntityFiller);
 
 
 /*
