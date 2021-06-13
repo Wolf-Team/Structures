@@ -24,11 +24,6 @@
             "source": "launcher.js",
             "type": "launcher",
             "language": "javascript"
-        },
-        {
-            "source": "lib/*",
-            "type": "library",
-            "language": "javascript"
         }
     ],
     "compile": [],
