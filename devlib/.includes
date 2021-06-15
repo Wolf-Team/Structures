@@ -1,13 +1,10 @@
-header.js
+# declaration
+header.ts
+utility.ts
 
-utility.js
+TileEntityRandomize.ts
+Rotate.ts
 
-structure.js
-structure_const.js
+Fillers/*
 
-rotate.js
-
-TileEntityRandomize.js
-TileEntityFiller.js
-DefaultTileEntityFiller.js
-APOFiller.js
+Structure.ts

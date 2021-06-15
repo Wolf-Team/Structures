@@ -1,19 +1,19 @@
 header.js
 
 # Testing adding blocks using the "addBlock" method
-# tests/addBlock.js
+tests/addBlock.js
 
 # Testing writing a structure to a file
-# tests/writeInFile.js
+tests/writeInFile.js
 
 # Testing reading a structure from a file
-# tests/readFromFile.js
+tests/readFromFile.js
 
 # Testing the read structure in the world
-# tests/get.js
+tests/get.js
 
 # Testing structure destruction
-# tests/destroy.js
+tests/destroy.js
 
 # Testing structure generation in chunk
-# tests/gen_chunk.js
+tests/gen_chunk.js

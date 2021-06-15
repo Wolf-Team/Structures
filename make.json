@@ -1,0 +1,36 @@
+{
+    "info": {
+        "name": "Structures",
+        "description": "A library that simplifies working with structures.",
+        "author": "WolfTeam",
+        "version": "2.0",
+        "api": "CoreEngine"
+    },
+    "resources": [],
+    "sources": [
+        {
+            "source": "dev",
+            "target": "main.js",
+            "type": "main",
+            "language": "typescript"
+        },
+        {
+            "source": "devlib",
+            "target": "Structures.js",
+            "type": "library",
+            "language": "typescript"
+        },
+        {
+            "source": "launcher.js",
+            "type": "launcher",
+            "language": "javascript"
+        }
+    ],
+    "compile": [],
+    "additional": [
+        {
+            "source": "root/*",
+            "targetDir": "./"
+        }
+    ]
+}

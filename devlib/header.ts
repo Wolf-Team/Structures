@@ -1,13 +1,16 @@
 /*
-     _____ _                   _                        
-    / ____| |_ _ __ _   _  ___| |_ _   _ _ __  ___  ___ 
-    \___ \| __| '__| | | |/ __| __| | | | '__|/ _ \/ __|
-     ___) | |_| |  | |_| | (__| |_| |_| | |  |  __/\__ \
-    |____/ \__|_|   \__,_|\___|\__|\__,_|_|   \___||___/
+	 _____ _                   _                        
+	/ ____| |_ _ __ _   _  ___| |_ _   _ _ __  ___  ___ 
+	\___ \| __| '__| | | |/ __| __| | | | '__|/ _ \/ __|
+	 ___) | |_| |  | |_| | (__| |_| |_| | |  |  __/\__ \
+	|____/ \__|_|   \__,_|\___|\__|\__,_|_|   \___||___/
 
-    Structures 2.0 ©WolfTeam ( https://vk.com/wolf___team )
+	Structures 2.1 ©WolfTeam ( https://vk.com/wolf___team )
 */
 /*  ChangeLog:
+	v2.1
+	- Отказ от поддержки InnerCore Legacy
+	- Переписано на TypeScript
 	v2.0
 	- Ренейминг
 	- Поддержка мультипллера
@@ -43,17 +46,31 @@
 	 * time - Время в миллисекундах между установкой/уничтожением блоков
 */
 LIBRARY({
-    name: "Structures",
-    version: 8,
-    shared: false,
-    api: "CoreEngine"
+	name: "Structures",
+	version: 21,
+	shared: false,
+	api: "CoreEngine"
 });
 
-//Temporary patch
-FileTools.getFullPath = function(str){return str;}
-
-var StructuresDB = {
-	structures:{},
-	versionSaver:3
-}
 var Random = java.util.Random;
+type Random = java.util.Random;
+type Dict<T = any> = { [key: string]: T };
+
+interface Slot {
+	id: number | string,
+	data?: number,
+	count?: number
+}
+
+namespace _World {
+	export function setBlock(x: number, y: number, z: number, id: number, data: number, blockSource?: BlockSource) {
+		if (!blockSource)
+			blockSource = BlockSource.getCurrentWorldGenRegion();
+		blockSource.setBlock(x, y, z, id, data);
+	}
+	export function getBlock(x: number, y: number, z: number, blockSource?: BlockSource) {
+		if (!blockSource)
+			blockSource = BlockSource.getCurrentWorldGenRegion();
+		return blockSource.getBlock(x, y, z);
+	}
+};
