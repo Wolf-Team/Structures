@@ -123,7 +123,7 @@ class Structure {
         FileTools.WriteText(__dir__ + "/" + Structure.dir + "/" + FileName + ".struct", JSON.stringify(saveObject));
     }
 
-    public addBlock(x: number, y: number, z: number, id: number, data: number, tileEntityRandomize: TileEntityRandomize) {
+    public addBlock(x: number, y: number, z: number, id: number, data?: number, tileEntityRandomize?: TileEntityRandomize) {
         if (!Utility.isInt(x))
             throw new TypeError('"' + x + '" is not a integer.');
         if (!Utility.isInt(y))

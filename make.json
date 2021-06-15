@@ -29,8 +29,8 @@
     "compile": [],
     "additional": [
         {
-            "source": "structures/*",
-            "targetDir": "structures"
+            "source": "root/*",
+            "targetDir": "./"
         }
     ]
 }

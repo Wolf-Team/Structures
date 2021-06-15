@@ -1,0 +1,52 @@
+{
+    "properties": {
+        "test_addBlock": {
+            "name": {
+                "ru": "Тест метода structure.addBlock",
+                "en": "structure.addBlock method test"
+            },
+            "description": {
+                "ru": "Тап по блоку предметом 280 установит структуру",
+                "en": "Tap on the block with item 280 will set the structure"
+            }
+        },
+        "test_destroy": {
+            "name": {
+                "ru": "Тест метода structure.destroy",
+                "en": "structure.destroy method test"
+            },
+            "description": {
+                "ru": "Тап по блоку предметом 281 установит структуру\nТап по структуре предметом 282 уничтожит структуру",
+                "en": "Block tap with item 281 will set structure \nTap on structure with item 282 will destroy structure"
+            }
+        },
+        "test_get": {
+            "name": {
+                "ru": "Тест метода structure.get",
+                "en": "structure.get method test"
+            },
+            "description": {
+                "ru": "Тап по блоку предметом 283 установит структуру\nТап по структуре предметом 284 проверит структуру",
+                "en": "Block tap with item 283 will set structure \nTap by structure with item 284 will check structure"
+            }
+        },
+        "test_gen_chunk": {
+            "name": {
+                "ru": "Тест генерации в чанке",
+                "en": "Generation test in a chunk"
+            }
+        },
+        "test_writeInFile": {
+            "name": {
+                "ru": "Тест метода structure.writeInFile",
+                "en": "structure.writeInFile method test"
+            }
+        },
+        "test_readFromFile": {
+            "name": {
+                "ru": "Тест метода structure.readFromFile",
+                "en": "structure.readFromFile method test"
+            }
+        }
+    }
+}

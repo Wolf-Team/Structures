@@ -1,0 +1,9 @@
+{
+    "enabled": true,
+    "test_addBlock": true,
+    "test_destroy": true,
+    "test_get": true,
+    "test_gen_chunk": true,
+    "test_writeInFile": true,
+    "test_readFromFile": true
+}
