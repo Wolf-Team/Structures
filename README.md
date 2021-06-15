@@ -1,4 +1,4 @@
-# Structures 2.0
+# Structures 2.1
 Structures - A library that simplifies working with structures.
 
 **en** | [ru](https://github.com/Wolf-Team/Structures/blob/main/README.RU.md)
@@ -55,7 +55,7 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 ```
 
 ## Structure file structure
-```js
+```json
 {
     "version":3,//int - file structure version
     "structures":[], // An array of blocks of the format [int x, int y, int z, ItemInstance item, TileEntityRandomize? radom_te]
@@ -64,14 +64,14 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 ```
 
 TileEntityRandomize is an object of the format *"Chance":"Filler Name"*. The chance is indicated from 0 to 1.
-```js
+```json
 {
     "1":"test_te"
 }
 ```
 
 TE fillers have the format *"Filler Name": {Filler Data}*
-```js
+```json
 "test_te":{ // TE filler named test_te
     "type":"default_filler", // Filler type (REQUIRED)
     ... // Filler data
@@ -81,7 +81,7 @@ TE fillers have the format *"Filler Name": {Filler Data}*
 ## Standard fillers
 ### DefaultTileEntityFiller
 DefaultTileEntityFiller fill the TileEntity with the specified content. Supports native and custom TileEntity. The file has the following format:
-```js
+```json
 {
     "type":"default_filler",
     "slots":{},//Object of format "Slot name": ItemInstance.
@@ -90,7 +90,7 @@ DefaultTileEntityFiller fill the TileEntity with the specified content. Supports
 ```
 ### APOFiller
 APOFiller migrated straight from [A.P.O. Craft](https://github.com/mineprogramming/APO_craft). Supports only native TileEntity. The file has the following format:
-```js
+```json
 {
     "type":"apo_filler",
     "items":[// Array of items that can be generated inside TileEntity
@@ -104,35 +104,34 @@ APOFiller migrated straight from [A.P.O. Craft](https://github.com/mineprogrammi
 }
 ```
 ### Custom filler
-```js
-function CustomTileEntityFiller(){
-};
+```ts
+class CustomTileEntityFiller extends TileEntityFiller{
+    /**
+     * Filling TileEntity
+     */
+    public fill(TE:ItemContainer | TileEntity | NativeTileEntity, random:java.lang.Random): void {}
+
+    /**
+     * Read from file
+     */
+    public parseJSON(json:ITileEntityFiller): void {}
+    
+    /**
+     * Write in file
+     */
+    public toJSON(): ITileEntityFiller {
+        //Get JSON from parent filler. (Required)
+        let json = super.toJSON();
+        //Here adding your data
+        return json;
+    }
+}
 //Register filler (Required)
 TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
-
-/**
- * Filling TileEntity
- * @param TE - NativeTileEntity | TileEntity
- * @param random - java.lang.Random
- */
-CustomTileEntityFiller.prototype.fill = function(TE, random){}
-/**
- * Read from file
- * @param json - object from File
- */
-CustomTileEntityFiller.prototype.parseJSON = function(json){}
-/**
- * Write in file
- */
-CustomTileEntityFiller.prototype.toJSON = function(){
-    //Get JSON from parent filler. (Required)
-    let json = CustomTileEntityFiller.superclass.toJSON.apply(this);
-    //Here adding your data
-    return json;
-}
 ```
 
 ## Older versions:
+* [StructuresAPI v2.0](https://github.com/Wolf-Team/Structures/tree/r2.0)
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)
 * [StructuresAPI v1.3](https://github.com/Wolf-Team/Libraries/blob/dcae52f5e030cb0b10ad2f3fee35c74542857890/StructuresAPI.js)
 * [StructuresAPI v1.2](https://github.com/Wolf-Team/Libraries/blob/e76e8ba4721eb8b6b42e29bf521578f1cf7b20ee/StructuresAPI.js)

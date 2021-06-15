@@ -5,9 +5,12 @@
 	 ___) | |_| |  | |_| | (__| |_| |_| | |  |  __/\__ \
 	|____/ \__|_|   \__,_|\___|\__|\__,_|_|   \___||___/
 
-	Structures 2.0 ©WolfTeam ( https://vk.com/wolf___team )
+	Structures 2.1 ©WolfTeam ( https://vk.com/wolf___team )
 */
 /*  ChangeLog:
+	v2.1
+	- Отказ от поддержки InnerCore Legacy
+	- Переписано на TypeScript
 	v2.0
 	- Ренейминг
 	- Поддержка мультипллера
@@ -44,7 +47,7 @@
 */
 LIBRARY({
 	name: "Structures",
-	version: 20,
+	version: 21,
 	shared: false,
 	api: "CoreEngine"
 });
