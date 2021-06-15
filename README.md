@@ -55,7 +55,7 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 ```
 
 ## Structure file structure
-```json
+```js
 {
     "version":3,//int - file structure version
     "structures":[], // An array of blocks of the format [int x, int y, int z, ItemInstance item, TileEntityRandomize? radom_te]
@@ -64,14 +64,14 @@ Callback.addCallback("ItemUse", function(coords, item, block, isExteral, player)
 ```
 
 TileEntityRandomize is an object of the format *"Chance":"Filler Name"*. The chance is indicated from 0 to 1.
-```json
+```js
 {
     "1":"test_te"
 }
 ```
 
 TE fillers have the format *"Filler Name": {Filler Data}*
-```json
+```js
 "test_te":{ // TE filler named test_te
     "type":"default_filler", // Filler type (REQUIRED)
     ... // Filler data
@@ -81,7 +81,7 @@ TE fillers have the format *"Filler Name": {Filler Data}*
 ## Standard fillers
 ### DefaultTileEntityFiller
 DefaultTileEntityFiller fill the TileEntity with the specified content. Supports native and custom TileEntity. The file has the following format:
-```json
+```js
 {
     "type":"default_filler",
     "slots":{},//Object of format "Slot name": ItemInstance.
@@ -90,7 +90,7 @@ DefaultTileEntityFiller fill the TileEntity with the specified content. Supports
 ```
 ### APOFiller
 APOFiller migrated straight from [A.P.O. Craft](https://github.com/mineprogramming/APO_craft). Supports only native TileEntity. The file has the following format:
-```json
+```js
 {
     "type":"apo_filler",
     "items":[// Array of items that can be generated inside TileEntity
