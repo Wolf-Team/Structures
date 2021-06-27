@@ -131,7 +131,7 @@ class CustomTileEntityFiller extends TileEntityFiller{
 //Регистрация заполнителя (Обязательно)
 TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
 ```
-For use in JavaScript, you can use the [extends](https://github.com/Wolf-Team/extends) library
+Для использования в JavaScript вы можете воспользоваться библиотекой [extends](https://github.com/Wolf-Team/extends)
 ```js
 IMPORT("extends", "__extends");
 
