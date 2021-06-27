@@ -105,6 +105,7 @@ APOFiller перекочевал прямиком из [A.P.O. Craft](https://gi
 ```
 ### Кастомные заполнители
 ```ts
+/* TypeScript */
 class CustomTileEntityFiller extends TileEntityFiller{
     /**
      * Заполнение TileEntity
@@ -127,6 +128,37 @@ class CustomTileEntityFiller extends TileEntityFiller{
         return json;
     }
 }
+//Регистрация заполнителя (Обязательно)
+TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
+```
+For use in JavaScript, you can use the [extends](https://github.com/Wolf-Team/extends) library
+```js
+IMPORT("extends", "__extends");
+
+function CustomTileEntityFiller(){
+    TileEntityFiller.call(this)
+};
+__extends(CustomTileEntityFiller, TileEntityFiller);
+
+/**
+ * Заполнение TileEntity
+ */
+CustomTileEntityFiller.prototype.fill = function(TE, random){}
+/**
+ * Чтение заполнителя из файла
+ * @param json - object from File
+ */
+CustomTileEntityFiller.prototype.parseJSON = function(json){}
+/**
+ * Запись заполнителя в файл
+ */
+CustomTileEntityFiller.prototype.toJSON = function(){
+    //Получить JSON от родительского заполнителя. (Обязательно)
+    let json = TileEntityFiller.prototype.toJSON.call(this);
+    //Здесь добавить свои данные
+    return json;
+}
+
 //Регистрация заполнителя (Обязательно)
 TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
 ```

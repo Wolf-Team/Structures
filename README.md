@@ -130,6 +130,36 @@ class CustomTileEntityFiller extends TileEntityFiller{
 TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
 ```
 
+```js
+IMPORT("extends", "__extends");
+
+function CustomTileEntityFiller(){
+    TileEntityFiller.call(this)
+};
+__extends(CustomTileEntityFiller, TileEntityFiller);
+
+/**
+ * Filling TileEntity
+ */
+CustomTileEntityFiller.prototype.fill = function(TE, random){}
+/**
+ * Read from file
+ */
+CustomTileEntityFiller.prototype.parseJSON = function(json){}
+/**
+ * Write in file
+ */
+CustomTileEntityFiller.prototype.toJSON = function(){
+    //Get JSON from parent filler. (Required)
+    let json = TileEntityFiller.prototype.toJSON.call(this);
+    //Here adding your data
+    return json;
+}
+
+//Register filler (Required)
+TileEntityFiller.register("custom_filler", CustomTileEntityFiller);
+```
+
 ## Older versions:
 * [StructuresAPI v2.0](https://github.com/Wolf-Team/Structures/tree/r2.0)
 * [StructuresAPI v1.4](https://github.com/Wolf-Team/Libraries/blob/master/StructuresAPI.js)
